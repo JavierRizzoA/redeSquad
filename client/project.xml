@@ -12,6 +12,7 @@
 	<source path="source"/>
 
 	<haxelib name="HaxePunk"/>
+	<haxelib name="haxe-ws"/>
 
 	<haxedef name="hxp_debug" unless="release" />
 

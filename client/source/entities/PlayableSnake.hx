@@ -1,16 +1,13 @@
 package entities;
 
+import haxe.Json;
 import haxepunk.input.Key;
 
 class PlayableSnake extends Snake {
-
-  public function new(
-      x:Float,
-      y:Float,
-      color:Int,
-      direction:Snake.Direction = Snake.Direction.RIGHT) {
-    super(x, y, color, direction);
-
+  public var inputs:Array<Dynamic>;
+  public function new(startData:Dynamic) {
+    super(startData);
+    inputs = new Array<Dynamic>();
   }
 
   override public function update() {
@@ -23,7 +20,18 @@ class PlayableSnake extends Snake {
     } else if(Key.check(Key.RIGHT) && direction != Snake.Direction.LEFT) {
       this.direction = Snake.Direction.RIGHT;
     }
+
+    if(Globals.updateFrame && direction != lastDirection) {
+      inputs.push({
+        frame: Globals.frameN,
+        direction: direction,
+        inputId: inputs.length
+      });
+      Globals.ws.sendString(Json.stringify({
+        type: "input",
+        value: inputs[inputs.length - 1]
+      }));
+    }
     super.update();
   }
-
 }

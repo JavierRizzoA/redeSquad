@@ -8,6 +8,8 @@
 --macro lime.Lib.extraParams()
 -cp /home/javierrizzo/haxelib/lime/4,0,3
 -D lime=4.0.3
+-cp /home/javierrizzo/haxelib/haxe-ws/1,0,5/src
+-D haxe-ws=1.0.5
 -cp source
 -cp /home/javierrizzo/haxelib/openfl/4,9,2/externs/core/openfl
 -cp /home/javierrizzo/haxelib/openfl/4,9,2/externs/extras

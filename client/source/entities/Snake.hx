@@ -8,29 +8,58 @@ import haxepunk.graphics.Image;
 
 class Snake extends EntityList<Entity> {
   public var color:Int;
+  public var id:Int;
   public var head:SnakeBit;
-  private var direction:Direction;
+  public var direction:Direction;
+  private var lastDirection:Direction;
+  private var alive:Bool;
 
-  public function new(
-      x:Float,
-      y:Float,
-      color:Int,
-      direction:Direction = Direction.RIGHT) {
+  public function new(startData:Dynamic) {
     super();
-    this.color = color;
-    this.direction = direction;
-    head = new SnakeBit(x, y, this);
+    if(startData.id == Globals.id)
+      color = 0xFF0000;
+    else
+      color = 0x0000FF;
+    direction = startData.direction;
+    id = startData.id;
+    head = new SnakeBit(startData.x, startData.y, this);
+    alive = startData.alive;
     add(head);
-    head.addBit();
-    head.addBit();
-    head.addBit();
-    head.addBit();
+
+    var bit:SnakeBit = head;
+    while(startData.next != null) {
+      bit.next = new SnakeBit(startData.next.x, startData.next.y, this);
+      add(bit.next);
+      startData = startData.next;
+      bit = bit.next;
+    }
+    //add(head);
+    //head.addBit();
+    //head.addBit();
+    //head.addBit();
+    //head.addBit();
   }
 
   override public function update() {
-    if(Globals.updateFrame)
+    if(Globals.updateFrame) {
       head.move(direction);
+      lastDirection = direction;
+    }
     super.update();
+  }
+
+  public function fromDynamic(dyn:Dynamic) {
+    direction = dyn.direction;
+    alive = dyn.alive;
+    if(!alive) {
+      HXP.scene.remove(this);
+      return;
+    }
+    head.fromDynamic(dyn);
+    if(id == Globals.id) {
+      var playable:PlayableSnake = cast(this, PlayableSnake);
+      direction = playable.inputs[playable.inputs.length - 1].direction;
+    }
   }
 }
 
@@ -59,7 +88,7 @@ class SnakeBit extends Entity {
   }
 
   override public function update() {
-    var e:Entity = collide("food", x, y);
+    /*var e:Entity = collide("food", x, y);
     if(e != null) {
       HXP.scene.remove(e);
       Globals.food = null;
@@ -72,8 +101,17 @@ class SnakeBit extends Entity {
         HXP.scene.remove(snake);
       }
 
-      if(x < 0 || x > HXP.scene.width - Globals.SQUARE_SIZE || y < 0 || y > HXP.scene.height - Globals.SQUARE_SIZE)
-        HXP.scene.remove(snake);
+    }*/
+    if(x < 0) {
+      x = HXP.width + x;
+    } else {
+      x = x % HXP.scene.width;
+    }
+
+    if(y < 0) {
+      y = HXP.height + y;
+    } else {
+      y = y % HXP.scene.height;
     }
     super.update();
   }
@@ -109,6 +147,21 @@ class SnakeBit extends Entity {
       snake.add(next);
     } else {
       next.addBit();
+    }
+  }
+
+  public function fromDynamic(dyn:Dynamic) {
+    x = dyn.x;
+    y = dyn.y;
+    if(dyn.next != null) {
+      if(next != null) {
+        next.fromDynamic(dyn.next);
+      } else {
+        trace("adding next");
+        next = new SnakeBit(x, y, snake);
+        snake.add(next);
+        next.fromDynamic(dyn.next);
+      }
     }
   }
 }

@@ -1,3 +1,5 @@
+package scenes;
+
 import haxepunk.HXP;
 import haxepunk.Scene;
 
@@ -21,12 +23,13 @@ class MainScene extends Scene {
     if(delta >= Globals.SPEED) {
       delta -= Globals.SPEED;
       Globals.updateFrame = true;
+      trace("update frame");
     }
-    super.update();
 
     if(Globals.food == null) {
       Globals.food = new entities.Food(Std.random(Math.floor(HXP.width / Globals.SQUARE_SIZE)) * Globals.SQUARE_SIZE, Std.random(Math.floor(HXP.height / Globals.SQUARE_SIZE)) * Globals.SQUARE_SIZE);
       add(Globals.food);
     }
+    super.update();
   }
 }
