@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-	<meta title="redeSquad" package="com.redesquad.snake" version="1.0.0" company=""/>
+	<meta title="redeSquad" package="com.redesquad.snake" version="1.0.0" company="Javier Rizzo-Aguirre"/>
 
 	<app file="Main" main="Main" path="export"/>
-	<icon path="HaxePunk-icon.svg"/>
+	<icon path="icon.png"/>
 	<window fps="60" background="0x333333"/>
 	<window width="900" height="600" resizable="true" unless="mobile"/>
 	<window width="0" height="0" fullscreen="true" if="mobile"/>
