@@ -27,7 +27,6 @@ class Globals {
       }));
     };
     Globals.ws.onmessageString = function(messageStr) {
-      trace("Received: " + messageStr);
       var message:Dynamic = Json.parse(messageStr);
       switch(message.type) {
         case "id-response":

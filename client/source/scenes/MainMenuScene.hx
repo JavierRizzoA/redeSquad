@@ -27,6 +27,7 @@ class MainMenuScene extends Scene {
           }
         }));
         remove(playButton);
+        addGraphic(new Text("WAITING FOR OTHER PLAYERS...", 0, 0, 0, 0, {size: 30, color: 0xFFFFFF}), 0, 0, HXP.halfHeight);
       }
     };
     playButton.x = HXP.halfWidth - playButton.width / 2;
