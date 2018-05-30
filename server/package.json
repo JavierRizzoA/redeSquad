@@ -1,13 +1,27 @@
 {
-  "name": "nibbles",
+  "name": "redesquad",
   "version": "1.0.0",
-  "description": "",
+  "description": "Multiplayer online snake game.",
+  "keywords": ["snake", "online", "multiplayer", "haxe", "node", "websockets"],
+  "homepage": "http://redesquad.com/",
+  "bugs": {
+    "url": "https://github.com/JavierRizzoA/redeSquad/issues",
+    "email": "javierrizzoa@gmail.com"
+  },
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node main.js"
   },
-  "author": "Javier Rizzo",
-  "license": "MIT",
+  "author": {
+    "name": "Javier Rizzo-Aguirre",
+    "email": "javierrizzoa@gmail.com",
+    "url": "http://javierrizzo.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JavierRizzoA/redeSquad.git"
+  },
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "ws": "^5.2.0"
   }
