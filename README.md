@@ -2,6 +2,8 @@
 
 Multiplayer online snake game.
 
+![Screenshot of the game](img/screenshot.png)
+
 ## Play it Online
 
 http://redesquad.com/
