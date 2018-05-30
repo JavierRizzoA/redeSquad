@@ -27,7 +27,7 @@ class Globals {
       }));
     };
     Globals.ws.onmessageString = function(messageStr) {
-      //trace("Received: " + messageStr);
+      trace("Received: " + messageStr);
       var message:Dynamic = Json.parse(messageStr);
       switch(message.type) {
         case "id-response":
@@ -48,7 +48,7 @@ class Globals {
           updateData = message.value;
           updated = false;
         case "finish-data":
-          HXP.scene = new scenes.FinishScene(message.value.result, message.value.winner.id);
+          HXP.scene = new scenes.FinishScene(message.value.result, message.value.winner.name);
       }
     };
     Globals.ws.onerror = function(messageStr) {

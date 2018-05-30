@@ -157,7 +157,6 @@ class SnakeBit extends Entity {
       if(next != null) {
         next.fromDynamic(dyn.next);
       } else {
-        trace("adding next");
         next = new SnakeBit(x, y, snake);
         snake.add(next);
         next.fromDynamic(dyn.next);

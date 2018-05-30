@@ -11,13 +11,13 @@ class LobbyScene extends Scene {
   private var startText:Text;
   override public function begin() {
     super.begin();
-    playersText = new Text("", HXP.halfWidth, 0, 0, 0, {align: openfl.text.TextFormatAlign.CENTER, color: 0xFFFFFF, size: 20});
+    playersText = new Text("", 0, 0, 0, 0, {align: openfl.text.TextFormatAlign.CENTER, color: 0xFFFFFF, size: 20});
     for(i in 0 ... Globals.startData.snakes.length) {
-      playersText.text += Globals.startData.snakes[i].id + "\n";
+      playersText.text += Globals.startData.snakes[i].name + "\n";
     }
     addGraphic(playersText);
     startText = new Text("", HXP.halfWidth, HXP.halfHeight, 0, 0, {align: openfl.text.TextFormatAlign.CENTER, color: 0xFFFFFF, size: 40});
-    addGraphic(startText);
+    addGraphic(startText, 0, HXP.halfWidth - startText.width, 30);
   }
 
   override public function update() {
